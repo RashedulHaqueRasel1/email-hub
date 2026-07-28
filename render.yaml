@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: emailhub-otp-service
+    runtime: node
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_ORIGIN
+        value: "*"
+      - key: OTP_EXPIRES_IN_MINUTES
+        value: 5
+      - key: OTP_MAX_ATTEMPTS_PER_WINDOW
+        value: 5
+      - key: MONGODB_URI
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_SENDER_EMAIL
+        sync: false
+      - key: BREVO_SENDER_NAME
+        sync: false
